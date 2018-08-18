@@ -1,12 +1,12 @@
 {
     "name": "daveismynamelaravel/box",
-    "description": ":description",
-    "license": "license",
+    "description": "A Laravel Box package",
+    "license": "MIT",
     "authors": [
         {
-            "name": "author name",
-            "email": "author email",
-            "homepage": "author homepage"
+            "name": "David Carr",
+            "email": "dave@daveismyname.com",
+            "homepage": "https://daveismyname.blog"
         }
     ],
     "homepage": "https://github.com/daveismynamelaravel/box",
@@ -21,11 +21,6 @@
     "autoload": {
         "psr-4": {
             "DaveismynameLaravel\\Box\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "DaveismynameLaravel\\Box\\Tests\\": "tests"
         }
     },
     "extra": {

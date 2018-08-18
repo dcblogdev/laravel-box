@@ -1,10 +1,10 @@
 <?php
 
+namespace DaveismynameLaravel\Box;
+
 /**
 * box api documenation can be found at https://developer.box.com/reference
 **/
-
-namespace DaveismynameLaravel\Box;
 
 use DaveismynameLaravel\Box\Api\Folders;
 use DaveismynameLaravel\Box\Api\Files;
