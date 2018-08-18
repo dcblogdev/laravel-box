@@ -1,0 +1,41 @@
+{
+    "name": "daveismynamelaravel/box",
+    "description": ":description",
+    "license": "license",
+    "authors": [
+        {
+            "name": "author name",
+            "email": "author email",
+            "homepage": "author homepage"
+        }
+    ],
+    "homepage": "https://github.com/daveismynamelaravel/box",
+    "keywords": ["Laravel", "Box"],
+    "require": {
+        "illuminate/support": "~5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0",
+        "orchestra/testbench": "~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "DaveismynameLaravel\\Box\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DaveismynameLaravel\\Box\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "DaveismynameLaravel\\Box\\BoxServiceProvider"
+            ],
+            "aliases": {
+                "Box": "DaveismynameLaravel\\Box\\Facades\\Box"
+            }
+        }
+    }
+}
