@@ -16,7 +16,7 @@ class BoxServiceProvider extends ServiceProvider
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'daveismynamelaravel');
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'daveismynamelaravel');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        $this->loadRoutesFrom(__DIR__.'/routes.php');
+        //$this->loadRoutesFrom(__DIR__.'/routes.php');
 
         $configPath = __DIR__.'/../config/box.php';
         $this->mergeConfigFrom($configPath, 'box');
