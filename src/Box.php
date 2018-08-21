@@ -122,7 +122,7 @@ class Box
             return json_decode($response->getBody()->getContents(), true);
 
         } catch (Exception $e) {
-            return json_decode($e->getResponse()->getBody()->getContents(), true);
+            return $e->getMessage();//json_decode($e->getResponse()->getBody()->getContents(), true);
         }
     }
 
