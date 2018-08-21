@@ -18,19 +18,21 @@ class BoxServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/routes.php');
 
-        $timestamp = date('Y_m_d_His', time());
-
-        $this->publishes([
-            __DIR__.'/../database/migrations/create_box_tokens_table.php' => $this->app->databasePath()."/migrations/{$timestamp}_create_box_tokens_tables.php",
-        ], 'migrations');
+        $configPath = __DIR__.'/../config/box.php';
+        $this->mergeConfigFrom($configPath, 'box');
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
 
-            // Publishing the configuration file.
+            $timestamp = date('Y_m_d_His', time());
+
             $this->publishes([
-                __DIR__.'/../config/box.php' => config_path('box.php'),
-            ], 'box.config');
+                __DIR__.'/../database/migrations/create_box_tokens_table.php' => $this->app->databasePath() . "/migrations/{$timestamp}_create_box_tokens_tables.php",
+            ], 'migrations');
+
+            $this->publishes([
+                $configPath => config_path('box.php'),
+            ], 'config');
 
             // Publishing the views.
             /*$this->publishes([

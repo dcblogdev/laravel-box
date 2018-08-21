@@ -22,7 +22,7 @@ providers' => [
 ```
 'aliases' => [
 	// ...
-	'Box' => DaveismynameLaravel\Box\Facades\Box::class
+    'Box' => DaveismynameLaravel\Box\Facades\Box::class
 ]
 ```
 
@@ -105,7 +105,7 @@ Please see [contributing.md](contributing.md) for details and a todolist.
 
 ## Security
 
-If you discover any security related issues, please email author email instead of using the issue tracker.
+If you discover any security related issues, please email `dave@daveismyname.com` instead of using the issue tracker.
 
 ## Credits
 
