@@ -137,11 +137,7 @@ Please see [contributing.md](contributing.md) for details and a todolist.
 
 ## Security
 
-If you discover any security related issues, please email `dave@daveismyname.com` instead of using the issue tracker.
-
-## Credits
-
-- [David Carr][dave@daveismyname.com]
+If you discover any security related issues, please email [dave@daveismyname.com](dave@daveismyname.com) instead of using the issue tracker.
 
 ## License
 
