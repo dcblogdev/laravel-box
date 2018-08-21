@@ -56,8 +56,8 @@ When published, the config/box.php config file contains:
 return [
     'clientId'       => env('BOX_CLIENT_ID'),
     'clientSecret'   => env('BOX_SECRET_ID'),
-    'redirectUri'    => env('BOX_REDIRECT_URI', url('box/oauth')),
-    'boxLandingUri'  => env('BOX_LANDING_URI', url('box')),
+    'redirectUri'    => env('BOX_REDIRECT_URI'),
+    'boxLandingUri'  => env('BOX_LANDING_URI'),
     'urlAuthorize'   => 'https://account.box.com/api/oauth2/authorize',
     'urlAccessToken' => 'https://www.box.com/api/oauth2/token',
 ];
@@ -71,6 +71,8 @@ The follow are required when using OAuth 2.0 credentials:
 * clientSecret
 
 The `redirectUri` is where Box should redirect to for authentication with Box, upon successful authentication the `boxLandingUri` is used to direct a user to a desired page.
+
+> Note BOX_REDIRECT_URI needs to be the full URI ie https://domain.com/box/
 
 ## Usage
 
