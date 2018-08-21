@@ -26,7 +26,7 @@ providers' => [
 ]
 ```
 
-You can publish the migration with:
+Publish the migration with:
 
 ```
 php artisan vendor:publish --provider="DaveismynameLaravel\Box\BoxServiceProvider" --tag="migrations"
@@ -42,12 +42,6 @@ You can publish the box config file with:
 
 ```
 php artisan vendor:publish --provider="DaveismynameLaravel\Box\BoxServiceProvider" --tag="config"
-```
-
-Or
-
-```
-php artisan vendor:publish
 ```
 
 When published, the config/box.php config file contains:
@@ -79,20 +73,58 @@ The `redirectUri` is where Box should redirect to for authentication with Box, u
 A routes example:
 
 ```
-Route::get('box', function(){
+Route::get('box', function() {
 
+    //if no box token exists then redirect
     if (!is_string(Box::getAccessToken())) {
         return redirect('box/oauth');
     } else {
-        //box folders and file list
-        return Box::folders();
+        //box authenticated now box:: can be used freely.
+
+        //example of getting the authenticated users details
+        return Box::get('/users/me');
     }
 });
 
-Route::get('box/oauth', function(){
+Route::get('box/oauth', function() {
     return Box::connect();
 });
 ```
+
+Box API documenation can be found at https://developer.box.com/reference
+
+Calls can be made by referencing Box:: then the verb get,post,put,patch or delete followed by the end point to call. An array can be passed as a second option.
+
+The end points are relative paths after https://api.box.com/2.0/
+
+Example GET request
+
+```
+Box::get('users/me');
+```
+
+Example POST request
+
+```
+Box::post('folders', [
+    'name' => 'name of the folder',
+    'parent' => [
+        'id' => 0
+    ]
+]);
+```
+
+The formula is:
+
+```
+Box::get('path', $array);
+Box::post('path', $array);
+Box::put('path', $array);
+Box::patch('path', $array);
+Box::delete('path', $array);
+```
+
+
 
 ## Change log
 

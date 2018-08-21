@@ -13,11 +13,6 @@ class BoxServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'daveismynamelaravel');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'daveismynamelaravel');
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        //$this->loadRoutesFrom(__DIR__.'/routes.php');
-
         $configPath = __DIR__.'/../config/box.php';
         $this->mergeConfigFrom($configPath, 'box');
 
@@ -27,7 +22,7 @@ class BoxServiceProvider extends ServiceProvider
             $timestamp = date('Y_m_d_His', time());
 
             $this->publishes([
-                __DIR__.'/../database/migrations/create_box_tokens_table.php' => $this->app->databasePath() . "/migrations/{$timestamp}_create_box_tokens_tables.php",
+                __DIR__.'/../database/migrations/create_box_tokens_table.php' => $this->app->databasePath() . "/migrations/{$timestamp}_create_box_tokens_table.php",
             ], 'migrations');
 
             $this->publishes([

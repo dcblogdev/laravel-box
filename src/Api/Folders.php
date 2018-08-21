@@ -19,9 +19,9 @@ trait Folders {
         return self::post('folders', [
             'name' => $name,
             'parent' => [
-                'id' => $parent]
+                'id' => $parent
             ]
-        );
+        ]);
     }
 
     public function folderUpdate($id, $data)
