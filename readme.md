@@ -1,5 +1,7 @@
 # Box
 
+WIP - not yet ready for production
+
 A Laravel package for working with Box, this includes authentication use Oauth2. In order to use this package you must have a Box application created at http://developer.box.com/ and set to use `Standard OAuth 2.0 (User Authentication)`
 
 ## Installation
