@@ -9,7 +9,7 @@ A Laravel package for working with Box, this includes authentication use Oauth2.
 Via Composer
 
 ``` bash
-$ composer require daveismynamelaravel/box
+$ composer require daveismyname/laravel-box
 ```
 
 In Laravel 5.5 the service provider will automatically get registered. In older versions of the framework just add the service provider in config/app.php file:
@@ -17,21 +17,21 @@ In Laravel 5.5 the service provider will automatically get registered. In older 
 ```
 providers' => [
     // ...
-    DaveismynameLaravel\Box\BoxServiceProvider::class,
+    Daveismyname\Box\BoxServiceProvider::class,
 ];
 ```
 
 ```
 'aliases' => [
 	// ...
-    'Box' => DaveismynameLaravel\Box\Facades\Box::class
+    'Box' => Daveismyname\Box\Facades\Box::class
 ]
 ```
 
 Publish the migration with:
 
 ```
-php artisan vendor:publish --provider="DaveismynameLaravel\Box\BoxServiceProvider" --tag="migrations"
+php artisan vendor:publish --provider="Daveismyname\Box\BoxServiceProvider" --tag="migrations"
 ```
 
 After the migration has been published you can create the box token table by running the migration:
@@ -43,7 +43,7 @@ php artisan migrate
 You can publish the box config file with:
 
 ```
-php artisan vendor:publish --provider="DaveismynameLaravel\Box\BoxServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Daveismyname\Box\BoxServiceProvider" --tag="config"
 ```
 
 When published, the config/box.php config file contains:

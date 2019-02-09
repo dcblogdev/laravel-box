@@ -1,6 +1,6 @@
 <?php
 
-namespace DaveismynameLaravel\Box\Facades;
+namespace Daveismyname\Box\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

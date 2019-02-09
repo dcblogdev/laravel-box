@@ -1,5 +1,5 @@
 {
-    "name": "daveismynamelaravel/box",
+    "name": "daveismyname/laravel-box",
     "description": "A Laravel Box package",
     "license": "MIT",
     "authors": [
@@ -9,7 +9,7 @@
             "homepage": "https://daveismyname.blog"
         }
     ],
-    "homepage": "https://github.com/daveismynamelaravel/box",
+    "homepage": "https://github.com/daveismyname/laravel-box",
     "keywords": ["Laravel", "Box"],
     "require": {
         "illuminate/support": "~5",
@@ -21,16 +21,16 @@
     },
     "autoload": {
         "psr-4": {
-            "DaveismynameLaravel\\Box\\": "src/"
+            "Daveismyname\\Box\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "DaveismynameLaravel\\Box\\BoxServiceProvider"
+                "Daveismyname\\Box\\BoxServiceProvider"
             ],
             "aliases": {
-                "Box": "DaveismynameLaravel\\Box\\Facades\\Box"
+                "Box": "Daveismyname\\Box\\Facades\\Box"
             }
         }
     }

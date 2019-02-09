@@ -1,14 +1,14 @@
 <?php
 
-namespace DaveismynameLaravel\Box;
+namespace Daveismyname\Box;
 
 /**
 * box api documenation can be found at https://developer.box.com/reference
 **/
 
-use DaveismynameLaravel\Box\Api\Folders;
-use DaveismynameLaravel\Box\Api\Files;
-use DaveismynameLaravel\Box\Models\BoxToken;
+use Daveismyname\Box\Api\Folders;
+use Daveismyname\Box\Api\Files;
+use Daveismyname\Box\Models\BoxToken;
 use GuzzleHttp\Client;
 use Exception;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace DaveismynameLaravel\Box\Api;
+namespace Daveismyname\Box\Api;
 
 trait Files {
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace DaveismynameLaravel\Box;
+namespace Daveismyname\Box;
 
 use Illuminate\Support\ServiceProvider;
 
