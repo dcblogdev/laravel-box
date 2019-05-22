@@ -6,16 +6,21 @@ namespace Daveismyname\Box;
 * box api documenation can be found at https://developer.box.com/reference
 **/
 
-use Daveismyname\Box\Api\Folders;
-use Daveismyname\Box\Api\Files;
+use Daveismyname\Box\Resources\Folders;
+use Daveismyname\Box\Resources\Files;
 use Daveismyname\Box\Models\BoxToken;
 use GuzzleHttp\Client;
 use Exception;
 
 class Box
 {
-    use Folders;
-    use Files;
+    public function files() {
+        return new Files();
+    }
+
+    public function folders() {
+        return new Folders();
+    }
 
     protected static $baseUrl = 'https://api.box.com/2.0/';
 

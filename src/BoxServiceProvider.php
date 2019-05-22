@@ -13,39 +13,21 @@ class BoxServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $configPath = __DIR__.'/../config/box.php';
-        $this->mergeConfigFrom($configPath, 'box');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
 
+            // Publishing the configuration file.
+            $this->publishes([
+                __DIR__.'/../config/box.php' => config_path('box.php'),
+            ], 'config');
+
             $timestamp = date('Y_m_d_His', time());
 
             $this->publishes([
-                __DIR__.'/../database/migrations/create_box_tokens_table.php' => $this->app->databasePath() . "/migrations/{$timestamp}_create_box_tokens_table.php",
+                __DIR__.'/database/migrations/create_box_tokens_table.php' => $this->app->databasePath()."/migrations/{$timestamp}_create_box_tokens_table.php",
             ], 'migrations');
-
-            $this->publishes([
-                $configPath => config_path('box.php'),
-            ], 'config');
-
-            // Publishing the views.
-            /*$this->publishes([
-                __DIR__.'/../resources/views' => base_path('resources/views/vendor/daveismynamelaravel'),
-            ], 'box.views');*/
-
-            // Publishing assets.
-            /*$this->publishes([
-                __DIR__.'/../resources/assets' => public_path('vendor/daveismynamelaravel'),
-            ], 'box.views');*/
-
-            // Publishing the translation files.
-            /*$this->publishes([
-                __DIR__.'/../resources/lang' => resource_path('lang/vendor/daveismynamelaravel'),
-            ], 'box.views');*/
-
-            // Registering package commands.
-            // $this->commands([]);
         }
     }
 
