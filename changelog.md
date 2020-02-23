@@ -9,3 +9,7 @@ Initial release.
 ## Version 2.0
 
 Changed vendor name to github.com/dcblogdev/laravel-box
+
+## Version 2.0.1
+
+Added Laravel 6 support
