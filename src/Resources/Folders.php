@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Dcblogdev\Box\Resources;
 
@@ -6,17 +7,17 @@ use Dcblogdev\Box\Facades\Box;
 
 class Folders extends Box
 {
-    public function get($id = 0)
+    public function get(int $id = 0): array
     {
         return Box::get('folders/'.$id);
     }
 
-    public function items($id = 0)
+    public function items(int $id = 0): array
     {
         return Box::get('folders/'.$id.'/items');
     }
 
-    public function store($name, $parent = 0)
+    public function store(string $name, int $parent = 0): array
     {
         return Box::post('folders', [
             'name' => $name,
@@ -26,12 +27,19 @@ class Folders extends Box
         ]);
     }
 
-    public function update($id, $data)
+    public function update(int $id, string $name, int $parent = null): array
     {
+        $data = [];
+        $data['name'] = $name;
+
+        if ($parent !== null) {
+            $data['parent'] = $parent;
+        }
+
         return Box::put('folders/'.$id, $data);
     }
 
-    public function copy($id, $parent = 0, $name = null)
+    public function copy(int $id, int $parent = 0, string $name = null): array
     {
         $data = [];
 
@@ -44,12 +52,12 @@ class Folders extends Box
         return Box::post('folders/'.$id.'/copy', $data);
     }
 
-    public function destroy($id)
+    public function destroy(int $id): void
     {
-        return Box::delete('folders/'.$id);
+        Box::delete('folders/'.$id.'?recursive=true');
     }
 
-    public function collaborations($id = 0)
+    public function collaborations(int $id = 0): array
     {
         return Box::get('folders/'.$id.'/collaborations');
     }

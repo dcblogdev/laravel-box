@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Dcblogdev\Box\Resources;
 
@@ -6,17 +7,17 @@ use Dcblogdev\Box\Facades\Box;
 
 class Files extends Box
 {
-    public function file($id)
+    public function file(int $id): array
     {
         return Box::get('files/'.$id);
     }
 
-    public function destroy($id)
+    public function destroy(int $id): void
     {
-        return Box::delete('files/'.$id);
+        Box::delete('files/'.$id);
     }
 
-    public function download($id, $path = '', $storeDownload = false)
+    public function download(int $id, string $path = '', bool $storeDownload = false): object
     {
         $file = Box::get('files/'.$id);
         $content = Box::get('files/'.$file['id'].'/content', ['raw' => true]);
@@ -35,7 +36,7 @@ class Files extends Box
         ];
     }
 
-    public function upload($filepath, $name, $parent = 0)
+    public function upload(string $filepath, string $name, int $parent = 0): array
     {
         $url = 'content';
 
@@ -50,7 +51,7 @@ class Files extends Box
         return self::uploadRun($url, $params);
     }
 
-    public function uploadRevision($file_id, $filepath, $name, $newname = null)
+    public function uploadRevision(int $file_id, string $filepath, string $name, string $newname = null): array
     {
         $url = $file_id.'/content';
 
@@ -68,7 +69,7 @@ class Files extends Box
         return self::uploadRun($url, $params);
     }
 
-    private static function uploadRun($endpoint, $params)
+    private static function uploadRun(string $endpoint, array $params): array
     {
         $url = 'https://upload.box.com/api/2.0/files/'.$endpoint;
         $headers = ["Authorization: Bearer ".Box::getAccessToken()];
