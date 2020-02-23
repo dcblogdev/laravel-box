@@ -1,6 +1,6 @@
 <?php
 
-namespace Daveismyname\Box\Models;
+namespace Dcblogdev\Box\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

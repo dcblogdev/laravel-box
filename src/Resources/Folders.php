@@ -1,8 +1,8 @@
 <?php
 
-namespace Daveismyname\Box\Resources;
+namespace Dcblogdev\Box\Resources;
 
-use Daveismyname\Box\Facades\Box;
+use Dcblogdev\Box\Facades\Box;
 
 class Folders extends Box
 {

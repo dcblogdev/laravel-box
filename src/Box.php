@@ -1,14 +1,14 @@
 <?php
 
-namespace Daveismyname\Box;
+namespace Dcblogdev\Box;
 
 /**
 * box api documenation can be found at https://developer.box.com/reference
 **/
 
-use Daveismyname\Box\Resources\Folders;
-use Daveismyname\Box\Resources\Files;
-use Daveismyname\Box\Models\BoxToken;
+use Dcblogdev\Box\Resources\Folders;
+use Dcblogdev\Box\Resources\Files;
+use Dcblogdev\Box\Models\BoxToken;
 use GuzzleHttp\Client;
 use Exception;
 

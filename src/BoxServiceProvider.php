@@ -1,6 +1,6 @@
 <?php
 
-namespace Daveismyname\Box;
+namespace Dcblogdev\Box;
 
 use Illuminate\Support\ServiceProvider;
 

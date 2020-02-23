@@ -4,9 +4,8 @@ All notable changes to `Box` will be documented in this file.
 
 ## Version 1.0
 
-## Version 1.1
+Initial release.
 
-Renamed repo to daveismyname/laravel-box
+## Version 2.0
 
-### Added
-- Everything
+Changed vendor name to github.com/dcblogdev/laravel-box
