@@ -114,7 +114,7 @@ class Box
         ]);
     }
 
-    protected function guzzle($type, $request, $data = []): array
+    protected function guzzle($type, $request, $data = [])
     {
         try {
             $client = new Client;
@@ -134,7 +134,7 @@ class Box
         }
     }
 
-    protected static function dopost($url, $params): object
+    protected static function dopost($url, $params)
     {
         try {
             $client = new Client;
