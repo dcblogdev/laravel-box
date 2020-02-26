@@ -17,7 +17,7 @@ class Files extends Box
         Box::delete('files/'.$id);
     }
 
-    public function download(int $id, string $path = '', bool $storeDownload = false): object
+    public function download(int $id, string $path = '', bool $storeDownload = false)
     {
         $file = Box::get('files/'.$id);
         $content = Box::get('files/'.$file['id'].'/content', ['raw' => true]);
