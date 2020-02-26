@@ -36,7 +36,7 @@ class Files extends Box
         ];
     }
 
-    public function upload(string $filepath, string $name, int $parent = 0): array
+    public function upload(string $filepath, string $name, int $parent = 0)
     {
         $url = 'content';
 
@@ -51,7 +51,7 @@ class Files extends Box
         return self::uploadRun($url, $params);
     }
 
-    public function uploadRevision(int $file_id, string $filepath, string $name, string $newname = null): array
+    public function uploadRevision(int $file_id, string $filepath, string $name, string $newname = null)
     {
         $url = $file_id.'/content';
 
@@ -69,7 +69,7 @@ class Files extends Box
         return self::uploadRun($url, $params);
     }
 
-    private static function uploadRun(string $endpoint, array $params): array
+    private static function uploadRun(string $endpoint, array $params)
     {
         $url = 'https://upload.box.com/api/2.0/files/'.$endpoint;
         $headers = ["Authorization: Bearer ".Box::getAccessToken()];
