@@ -20,11 +20,27 @@ class Files extends Box
     public function download(int $id, string $path = '', bool $storeDownload = false)
     {
         $file = Box::get('files/'.$id);
-        $content = Box::get('files/'.$file['id'].'/content', ['raw' => true]);
+        if (! isset($file['name'])) {
+            throw new Exception("File not found on box");
+        }
 
-        file_put_contents($path.$file['name'], $content);
-
+        $url = 'https://api.box.com/2.0/files/'.$id.'/content';
+        $headers = ["Authorization: Bearer ".Box::getAccessToken()];
         $path = $path.$file['name'];
+
+        //This is the file where we save the    information
+        $fp = fopen ($path, 'w+');
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POST, false);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_FILE, $fp);
+        $response = curl_exec($ch);
+        curl_close($ch);
 
         if ($storeDownload == false) {
             return response()->download($path)->deleteFileAfterSend(true);
