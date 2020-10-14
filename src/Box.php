@@ -8,6 +8,7 @@ use Dcblogdev\Box\Resources\Files;
 use Dcblogdev\Box\Models\BoxToken;
 use GuzzleHttp\Client;
 use Exception;
+use GuzzleHttp\Exception\BadResponseException;
 
 class Box
 {
@@ -129,8 +130,8 @@ class Box
 
             return json_decode($response->getBody()->getContents(), true);
 
-        } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+        } catch (BadResponseException $e) {
+            throw new BadResponseException($e->getMessage(),$e->getRequest(),$e->getResponse());
         }
     }
 
