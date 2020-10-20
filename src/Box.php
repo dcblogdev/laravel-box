@@ -29,9 +29,10 @@ class Box
         $options = ['get', 'post', 'patch', 'put', 'delete'];
         $path = (isset($args[0])) ? $args[0] : null;
         $data = (isset($args[1])) ? $args[1] : null;
+        $returnGuzzleResponse = (isset($args[2])) ? $args[2] : false;
 
         if (in_array($function, $options)) {
-            return $this->guzzle($function, $path, $data);
+            return $this->guzzle($function, $path, $data, $returnGuzzleResponse);
         } else {
             //request verb is not in the $options array
             throw new Exception($function.' is not a valid HTTP Verb');
@@ -115,7 +116,7 @@ class Box
         ]);
     }
 
-    protected function guzzle($type, $request, $data = [])
+    protected function guzzle($type, $request, $data = [], $returnGuzzleResponse = false)
     {
         try {
             $client = new Client;
@@ -125,11 +126,14 @@ class Box
                     'Authorization' => 'Bearer '.$this->getAccessToken(),
                     'content-type' => 'application/json',
                 ],
+                'allow_redirects' => false,
                 'body' => json_encode($data),
             ]);
 
+            if($returnGuzzleResponse){
+                return $response;
+            }
             return json_decode($response->getBody()->getContents(), true);
-
         } catch (BadResponseException $e) {
             throw new BadResponseException($e->getMessage(),$e->getRequest(),$e->getResponse());
         }

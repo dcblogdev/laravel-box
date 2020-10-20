@@ -4,9 +4,14 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "David Carr",
+            "name": "OriginalAuthor - David Carr",
             "email": "dave@dcblog.dev",
             "homepage": "https://dcblog.dev"
+        },
+        {
+            "name": "Modify By - Rafael Marques",
+            "email": "rafael.marques@agilize.com.br",
+            "homepage": "https://agilize.com.br"
         }
     ],
     "homepage": "https://github.com/dcblogdev/laravel-box",
