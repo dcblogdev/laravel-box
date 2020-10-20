@@ -9,6 +9,7 @@ use Dcblogdev\Box\Models\BoxToken;
 use GuzzleHttp\Client;
 use Exception;
 use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Psr7\Response;
 
 class Box
 {
@@ -17,7 +18,7 @@ class Box
         return new Files();
     }
 
-    public function folders(): object 
+    public function folders(): object
     {
         return new Folders();
     }
@@ -29,25 +30,26 @@ class Box
         $options = ['get', 'post', 'patch', 'put', 'delete'];
         $path = (isset($args[0])) ? $args[0] : null;
         $data = (isset($args[1])) ? $args[1] : null;
-        $returnGuzzleResponse = (isset($args[2])) ? $args[2] : false;
+        $processResponse = (isset($args[2])) ? $args[2] : false;
+        $allowRedirects = (isset($args[3])) ? $args[3] : true;
 
         if (in_array($function, $options)) {
-            return $this->guzzle($function, $path, $data, $returnGuzzleResponse);
+            return $this->guzzle($function, $path, $data, $processResponse, $allowRedirects);
         } else {
             //request verb is not in the $options array
-            throw new Exception($function.' is not a valid HTTP Verb');
+            throw new Exception($function . ' is not a valid HTTP Verb');
         }
     }
 
     public function connect(): redirect
-    {      
-        if (! request()->has('code')) {
+    {
+        if (!request()->has('code')) {
             //redirect to box
             $url = config('box.urlAuthorize') . '?' . http_build_query([
-                'response_type' => 'code',
-                'client_id' => config('box.clientId'),
-                'redirect_uri' => config('box.redirectUri')
-            ]);
+                    'response_type' => 'code',
+                    'client_id' => config('box.clientId'),
+                    'redirect_uri' => config('box.redirectUri')
+                ]);
 
             return $this->redirect($url);
 
@@ -72,7 +74,7 @@ class Box
         $token = BoxToken::where('user_id', auth()->id())->first();
 
         // Check if tokens exist otherwise run the oauth request
-        if (! isset($token->access_token)) {
+        if (!isset($token->access_token)) {
             return $this->redirect(config('box.redirectUri'));
         }
 
@@ -88,9 +90,9 @@ class Box
         if ($token->expires <= $now) {
             // Token is expired (or very close to it) so let's refresh
             $params = [
-                'grant_type'    => 'refresh_token',
+                'grant_type' => 'refresh_token',
                 'refresh_token' => $token->refresh_token,
-                'client_id'     => config('box.clientId'),
+                'client_id' => config('box.clientId'),
                 'client_secret' => config('box.clientSecret')
             ];
             $accessToken = $this->dopost(config('box.urlAccessToken'), $params);
@@ -99,8 +101,8 @@ class Box
             $this->storeToken($accessToken->access_token, $accessToken->refresh_token, $accessToken->expires_in);
 
             return $accessToken->access_token;
-        } 
-        
+        }
+
         // Token is still valid, just return it
         return $token->access_token;
     }
@@ -109,33 +111,36 @@ class Box
     {
         //create a new record or if the user id exists update record
         BoxToken::updateOrCreate(['user_id' => auth()->id()], [
-            'user_id'       => auth()->id(),
-            'access_token'  => $access_token,
-            'expires'       => $expires,
+            'user_id' => auth()->id(),
+            'access_token' => $access_token,
+            'expires' => $expires,
             'refresh_token' => $refresh_token
         ]);
     }
 
-    protected function guzzle($type, $request, $data = [], $returnGuzzleResponse = false)
+    protected function guzzle($type, $request, $data = [], $processResponse = false, $allowRedirects = true)
     {
         try {
             $client = new Client;
 
-            $response = $client->$type($this->baseUrl.$request, [
+            $config = [
                 'headers' => [
-                    'Authorization' => 'Bearer '.$this->getAccessToken(),
+                    'Authorization' => 'Bearer ' . $this->getAccessToken(),
                     'content-type' => 'application/json',
                 ],
-                'allow_redirects' => false,
+                'allow_redirects' => $allowRedirects,
                 'body' => json_encode($data),
-            ]);
+            ];
 
-            if($returnGuzzleResponse){
-                return $response;
+            $response = $client->$type($this->baseUrl . $request, $config);
+
+            if ($processResponse) {
+                return $this->processResponse($response);
             }
+
             return json_decode($response->getBody()->getContents(), true);
         } catch (BadResponseException $e) {
-            throw new BadResponseException($e->getMessage(),$e->getRequest(),$e->getResponse());
+            throw new BadResponseException($e->getMessage(), $e->getRequest(), $e->getResponse());
         }
     }
 
@@ -150,11 +155,21 @@ class Box
         } catch (Exception $e) {
             return json_decode($e->getResponse()->getBody()->getContents(), true);
         }
-	}
+    }
+
+    private function processResponse(Response $response)
+    {
+        return [
+            'reasonPhrase' => $response->getReasonPhrase(),
+            'statusCode' => $response->getStatusCode(),
+            'headers' => $response->getHeaders(),
+            'body' => $response->getBody()->getContents()
+        ];
+    }
 
     protected function redirect($url): void
     {
-        header('Location: '.$url);
+        header('Location: ' . $url);
         exit();
     }
 }
