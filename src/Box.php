@@ -7,6 +7,7 @@ use Dcblogdev\Box\Resources\Folders;
 use Dcblogdev\Box\Resources\Files;
 use Dcblogdev\Box\Models\BoxToken;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use Exception;
 
 class Box
@@ -142,8 +143,10 @@ class Box
 
             return json_decode($response->getBody()->getContents());
 
+        } catch (ClientException $e) {
+            throw new Exception($e->getResponse()->getBody()->getContents());
         } catch (Exception $e) {
-            return json_decode($e->getResponse()->getBody()->getContents(), true);
+            throw new Exception($e->getMessage());
         }
 	}
 
