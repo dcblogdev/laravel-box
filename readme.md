@@ -1,9 +1,12 @@
-# Laravel Box
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/dcblogdev/laravel-box.svg?style=flat-square)](https://packagist.org/packages/dcblogdev/laravel-box)
+[![Total Downloads](https://img.shields.io/packagist/dt/dcblogdev/laravel-box.svg?style=flat-square)](https://packagist.org/packages/dcblogdev/laravel-box)
 
-A Laravel package for working with Box, this includes authentication use Oauth2. In order to use this package you must have a Box application created at http://developer.box.com/ and set to use `Standard OAuth 2.0 (User Authentication)`
+![Logo](https://repository-images.githubusercontent.com/145237952/11826600-494d-11eb-88fa-264ef0affd6b)
 
-# Full documentation and install instructions 
-[https://docs.dcblog.dev/laravel-box](https://docs.dcblog.dev/laravel-box)
+A Laravel package for working with box API.
+
+# Documentation and install instructions 
+[https://dcblog.dev/docs/laravel-box](https://dcblog.dev/docs/laravel-box)
 
 ## Change log
 
