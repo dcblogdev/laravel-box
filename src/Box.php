@@ -144,6 +144,11 @@ class Box
             return json_decode($response->getBody()->getContents());
 
         } catch (ClientException $e) {
+            $response = json_decode($e->getResponse()->getBody()->getContents());
+            if ($response->error_description === 'Refresh token has expired') {
+                 header('Location: '.config('box.redirectUri'));
+                exit();
+            }
             throw new Exception($e->getResponse()->getBody()->getContents());
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
