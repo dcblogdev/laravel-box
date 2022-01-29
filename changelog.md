@@ -36,4 +36,12 @@ Fixed file download, contents where not being transferred.
 
 ## Version 2.1.1
 
+Added support for Guzzle 7 and better error handling
+
+## Version 2.1.2
+
+Redirect to redirect uri when token has expired
+
+## Version 2.1.3
+
 Added support for Laravel 9
