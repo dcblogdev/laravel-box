@@ -33,3 +33,7 @@ Removed return types for uploads
 ## Version 2.1.0
 
 Fixed file download, contents where not being transferred.
+
+## Version 2.1.1
+
+Added support for Laravel 9
