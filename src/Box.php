@@ -129,7 +129,8 @@ class Box
             ]);
 
             return json_decode($response->getBody()->getContents(), true);
-
+        } catch (ClientException $e) {
+            throw new Exception($e->getResponse()->getBody()->getContents());
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
