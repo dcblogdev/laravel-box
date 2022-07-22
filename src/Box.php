@@ -13,6 +13,8 @@ use GuzzleHttp\Psr7\Response;
 
 class Box
 {
+    const METHOD_GET = 'get';
+
     public function files(): object
     {
         return new Files();
@@ -129,8 +131,11 @@ class Box
                     'content-type' => 'application/json',
                 ],
                 'allow_redirects' => $allowRedirects,
-                'body' => json_encode($data),
             ];
+
+            if (!is_null($data) && !empty($data)) {
+                $config['body'] = json_encode($data);
+            }
 
             $response = $client->$type($this->baseUrl . $request, $config);
 
