@@ -133,7 +133,7 @@ class Box
                 'allow_redirects' => $allowRedirects,
             ];
 
-            if (!is_null($data) && !empty($data)) {
+            if (!empty($data)) {
                 $config['body'] = json_encode($data);
             }
 
