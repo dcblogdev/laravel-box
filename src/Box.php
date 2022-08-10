@@ -120,13 +120,12 @@ class Box
         try {
             $client = new Client;
 
-            $response = $client->$type($this->baseUrl.$request, [
+            $response = $client->$type($this->baseUrl.$request, array_merge([
                 'headers' => [
                     'Authorization' => 'Bearer '.$this->getAccessToken(),
                     'content-type' => 'application/json',
-                ],
-                'body' => json_encode($data),
-            ]);
+                ]
+            ], empty($data) ? [] : ['body' => json_encode($data)]));
 
             return json_decode($response->getBody()->getContents(), true);
         } catch (ClientException $e) {
