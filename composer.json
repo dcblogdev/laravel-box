@@ -13,7 +13,7 @@
     "keywords": ["Laravel", "Box"],
     "require": {
         "php": "^7.2|^8.0",
-        "illuminate/support": "7.x|8.x|9.x",
+        "illuminate/support": "7.x|8.x|9.x|10.x",
         "guzzlehttp/guzzle": "6.x|7.x"
     },
     "autoload": {
