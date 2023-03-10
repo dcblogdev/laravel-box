@@ -13,6 +13,8 @@ use GuzzleHttp\Psr7\Response;
 
 class Box
 {
+    const ERROR_MARGIN = 100;
+
     const METHOD_GET = 'get';
 
     public function files(): object
@@ -65,7 +67,9 @@ class Box
 
             $token = $this->dopost(config('box.urlAccessToken'), $params);
 
-            $this->storeToken($token->access_token, $token->refresh_token, $token->expires_in);
+            $expires = time() + intval($token->expires_in) - self::ERROR_MARGIN;
+
+            $this->storeToken($token->access_token, $token->refresh_token, $expires);
 
             return $this->redirect(config('box.boxLandingUri'));
         }
@@ -99,8 +103,10 @@ class Box
             ];
             $accessToken = $this->dopost(config('box.urlAccessToken'), $params);
 
+            $expires = time() + intval($accessToken->expires_in) - self::ERROR_MARGIN;
+
             // Store the new values
-            $this->storeToken($accessToken->access_token, $accessToken->refresh_token, $accessToken->expires_in);
+            $this->storeToken($accessToken->access_token, $accessToken->refresh_token, $expires);
 
             return $accessToken->access_token;
         }
