@@ -1,7 +1,6 @@
 <?php
 
 use Dcblogdev\Box\Facades\Box as BoxFacade;
-use Dcblogdev\Box\Models\BoxToken;
 use Dcblogdev\Box\Box;
 use Illuminate\Http\RedirectResponse;
 
